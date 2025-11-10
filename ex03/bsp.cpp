@@ -8,11 +8,9 @@ Fixed getDeterminant(Point const p1, Point const p2, Point const p3) {
 }
 
 bool bsp(Point const a, Point const b, Point const c, Point const point) {
-    Fixed res1, res2, res3;
-
-    res1 = getDeterminant(a, b, point);
-    res2 = getDeterminant(b, c, point);
-    res3 = getDeterminant(c, a, point);
+    Fixed res1 = getDeterminant(a, b, point);
+    Fixed res2 = getDeterminant(b, c, point);
+    Fixed res3 = getDeterminant(c, a, point);
 
     if (res1 > 0 && res2 > 0 && res3 > 0)
         return true;
