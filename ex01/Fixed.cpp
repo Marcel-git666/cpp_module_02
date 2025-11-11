@@ -43,7 +43,7 @@ float Fixed::toFloat(void) const {
            static_cast<float>(1 << _fractionalBits);
 }
 
-int Fixed::toInt(void) const { return _fixedPointValue >> _fractionalBits; }
+int Fixed::toInt(void) const { return _fixedPointValue / (1 << _fractionalBits); }
 
 std::ostream &operator<<(std::ostream &out, Fixed const &value) {
     return out << value.toFloat();

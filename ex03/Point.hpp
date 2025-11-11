@@ -12,8 +12,8 @@ class Point {
     // Orthodox Canonical Form
     Point(void);
     Point(float x_val, float y_val);
-    Point(const Point &other);
-    Point &operator=(const Point &other);
+    Point(Point const &other);
+    Point &operator=(Point const &other);
     ~Point(void);
     // getters
     Fixed getX(void) const;

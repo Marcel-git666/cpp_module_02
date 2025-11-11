@@ -6,7 +6,7 @@ Fixed::Fixed(void) {
     _fixedPointValue = 0;
 }
 
-Fixed::Fixed(const Fixed &other) {
+Fixed::Fixed(Fixed const &other) {
     _fixedPointValue = other._fixedPointValue;
 }
 
@@ -30,6 +30,10 @@ Fixed::Fixed(float const value) {
 
 // Other methods
 
+int Fixed::getRawBits(void) const {
+    return _fixedPointValue;
+}
+
 void Fixed::setRawBits(int const raw) { _fixedPointValue = raw; }
 
 float Fixed::toFloat(void) const {
@@ -37,7 +41,7 @@ float Fixed::toFloat(void) const {
            static_cast<float>(1 << _fractionalBits);
 }
 
-int Fixed::toInt(void) const { return _fixedPointValue >> _fractionalBits; }
+int Fixed::toInt(void) const { return _fixedPointValue / (1 << _fractionalBits); }
 
 // Operators
 
@@ -91,7 +95,7 @@ Fixed Fixed::operator/(Fixed const &other) const {
     long result = (static_cast<long>(_fixedPointValue) << _fractionalBits) /
                   other._fixedPointValue;
     temp.setRawBits(static_cast<int>(result));
-    return Fixed(temp);
+    return temp;
 }
 
 // pre
@@ -113,7 +117,7 @@ Fixed Fixed::operator++(int) {
 
 Fixed Fixed::operator--(int) {
     Fixed temp;
-    temp.setRawBits(this->_fixedPointValue--);
+    temp.setRawBits(_fixedPointValue--);
     return temp;
 }
 
