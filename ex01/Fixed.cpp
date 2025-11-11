@@ -4,47 +4,47 @@
 
 Fixed::Fixed(void) {
     std::cout << "Default constructor called\n";
-    this->_fixedPointValue = 0;
+    _fixedPointValue = 0;
 }
 
-Fixed::Fixed(const Fixed &other) {
+Fixed::Fixed(Fixed const &other) {
     std::cout << "Copy constructor called\n";
-    this->_fixedPointValue = other._fixedPointValue;
+    _fixedPointValue = other._fixedPointValue;
 }
 
-Fixed &Fixed::operator=(const Fixed &other) {
+Fixed &Fixed::operator=(Fixed const &other) {
     std::cout << "Copy assignment operator called\n";
     if (this != &other) {
-        this->_fixedPointValue = other._fixedPointValue;
+        _fixedPointValue = other._fixedPointValue;
     }
     return *this;
 }
 
 Fixed::~Fixed(void) { std::cout << "Destructor called\n"; }
 
-Fixed::Fixed(const int value) {
+Fixed::Fixed(int const value) {
     std::cout << "Int constructor called\n";
-    this->_fixedPointValue = value << this->_fractionalBits;
+    _fixedPointValue = value << _fractionalBits;
 }
 
-Fixed::Fixed(const float value) {
+Fixed::Fixed(float const value) {
     std::cout << "Float constructor called\n";
-    float scaled = value * (1 << this->_fractionalBits);
-    this->_fixedPointValue = static_cast<int>(roundf(scaled));
+    float scaled = value * (1 << _fractionalBits);
+    _fixedPointValue = static_cast<int>(roundf(scaled));
 }
 
 // Other methods
+int Fixed::getRawBits(void) const { return _fixedPointValue; }
 
-void Fixed::setRawBits(int const raw) { this->_fixedPointValue = raw; }
+void Fixed::setRawBits(int const raw) { _fixedPointValue = raw; }
 
 float Fixed::toFloat(void) const {
-    return (float)this->_fixedPointValue / (float)(1 << this->_fractionalBits);
+    return static_cast<float>(_fixedPointValue) /
+           static_cast<float>(1 << _fractionalBits);
 }
 
-int Fixed::toInt(void) const {
-    return (int)this->_fixedPointValue >> _fractionalBits;
-}
+int Fixed::toInt(void) const { return _fixedPointValue >> _fractionalBits; }
 
-std::ostream &operator<<(std::ostream &out, const Fixed &value) {
+std::ostream &operator<<(std::ostream &out, Fixed const &value) {
     return out << value.toFloat();
 }
