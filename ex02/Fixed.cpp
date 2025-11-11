@@ -76,43 +76,43 @@ Fixed Fixed::operator+(Fixed const &other) const {
     return temp;
 }
 
-Fixed Fixed::operator-(const Fixed &other) const {
+Fixed Fixed::operator-(Fixed const &other) const {
     Fixed temp;
-    temp.setRawBits(this->_fixedPointValue - other._fixedPointValue);
+    temp.setRawBits(_fixedPointValue - other._fixedPointValue);
     return temp;
 }
 
-Fixed Fixed::operator*(const Fixed &other) const {
+Fixed Fixed::operator*(Fixed const &other) const {
     Fixed temp;
     long multiplication;
-    multiplication = (long)this->_fixedPointValue * other._fixedPointValue >>
+    multiplication = static_cast<long>(_fixedPointValue) * other._fixedPointValue >>
                      _fractionalBits;
     temp.setRawBits(multiplication);
     return temp;
 }
 
-Fixed Fixed::operator/(const Fixed &other) const {
+Fixed Fixed::operator/(Fixed const &other) const {
     Fixed temp;
-    long result = ((long)this->_fixedPointValue << this->_fractionalBits) /
+    long result = (static_cast<long>(_fixedPointValue) << _fractionalBits) /
                   other._fixedPointValue;
-    temp.setRawBits((int)result);
+    temp.setRawBits(static_cast<int>(result));
     return Fixed(temp);
 }
 
 // pre
 Fixed &Fixed::operator++(void) {
-    this->_fixedPointValue++;
+    _fixedPointValue++;
     return *this;
 }
 
 Fixed &Fixed::operator--(void) {
-    this->_fixedPointValue--;
+    _fixedPointValue--;
     return *this;
 }
 // post
 Fixed Fixed::operator++(int) {
     Fixed temp;
-    temp.setRawBits(this->_fixedPointValue++);
+    temp.setRawBits(_fixedPointValue++);
     return temp;
 }
 
@@ -124,16 +124,16 @@ Fixed Fixed::operator--(int) {
 
 Fixed &Fixed::min(Fixed &a, Fixed &b) { return (a < b ? a : b); }
 
-const Fixed &Fixed::min(const Fixed &a, const Fixed &b) {
+const Fixed &Fixed::min(Fixed const &a, Fixed const &b) {
     return (a < b ? a : b);
 }
 
 Fixed &Fixed::max(Fixed &a, Fixed &b) { return (a > b ? a : b); }
 
-const Fixed &Fixed::max(const Fixed &a, const Fixed &b) {
+const Fixed &Fixed::max(Fixed const &a, Fixed const &b) {
     return (a > b ? a : b);
 }
 
-std::ostream &operator<<(std::ostream &out, const Fixed &value) {
+std::ostream &operator<<(std::ostream &out, Fixed const &value) {
     return out << value.toFloat();
 }

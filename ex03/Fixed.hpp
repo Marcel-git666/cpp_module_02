@@ -11,12 +11,12 @@ class Fixed {
   public:
     // Orthodox Canonical Form
     Fixed(void);
-    Fixed(const Fixed &other);
-    Fixed &operator=(const Fixed &other);
+    Fixed(Fixed const &other);
+    Fixed &operator=(Fixed const &other);
     ~Fixed(void);
 
-    Fixed(const int value);
-    Fixed(const float value);
+    Fixed(int const value);
+    Fixed(float const value);
 
     // Other methods
     void setRawBits(int const raw);
@@ -24,16 +24,16 @@ class Fixed {
     int toInt(void) const;
 
     // Operators
-    bool operator>(const Fixed &other) const;
-    bool operator<(const Fixed &other) const;
-    bool operator>=(const Fixed &other) const;
-    bool operator<=(const Fixed &other) const;
-    bool operator==(const Fixed &other) const;
-    bool operator!=(const Fixed &other) const;
-    Fixed operator+(const Fixed &other) const;
-    Fixed operator-(const Fixed &other) const;
-    Fixed operator*(const Fixed &other) const;
-    Fixed operator/(const Fixed &other) const;
+    bool operator>(Fixed const &other) const;
+    bool operator<(Fixed const &other) const;
+    bool operator>=(Fixed const &other) const;
+    bool operator<=(Fixed const &other) const;
+    bool operator==(Fixed const &other) const;
+    bool operator!=(Fixed const &other) const;
+    Fixed operator+(Fixed const &other) const;
+    Fixed operator-(Fixed const &other) const;
+    Fixed operator*(Fixed const &other) const;
+    Fixed operator/(Fixed const &other) const;
     // pre
     Fixed &operator++(void);
     Fixed &operator--(void);
@@ -44,11 +44,11 @@ class Fixed {
     // static
 
     static Fixed &min(Fixed &a, Fixed &b);
-    static const Fixed &min(const Fixed &a, const Fixed &b);
+    static Fixed const &min(Fixed const &a, Fixed const &b);
     static Fixed &max(Fixed &a, Fixed &b);
-    static const Fixed &max(const Fixed &a, const Fixed &b);
+    static Fixed const &max(Fixed const &a, Fixed const &b);
 };
 
-std::ostream &operator<<(std::ostream &out, const Fixed &value);
+std::ostream &operator<<(std::ostream &out, Fixed const &value);
 
 #endif
